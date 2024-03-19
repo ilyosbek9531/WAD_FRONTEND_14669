@@ -8,6 +8,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'WAD_FRONTEND_14669';
-}
+export class AppComponent {}
