@@ -1,6 +1,12 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { MovieComponent } from './pages/movie/movie.component';
+import { CategoryDetailsComponent } from './pages/category-details/category-details.component';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { CategoryCreateComponent } from './pages/category-create/category-create.component';
+import { MovieCreateComponent } from './pages/movie-create/movie-create.component';
 
 export const routes: Routes = [
     {   path: '',   
@@ -10,6 +16,30 @@ export const routes: Routes = [
     {
         path:"home",
         component: HomeComponent
+    },
+    {
+        path:"category",
+        component: CategoryComponent
+    },
+    {
+        path:"category/:id",
+        component: CategoryDetailsComponent
+    },
+    {
+        path:"category-create",
+        component: CategoryCreateComponent
+    },
+    {
+        path:"movie",
+        component: MovieComponent
+    },
+    {
+        path:"movie/:id",
+        component: MovieDetailsComponent
+    },
+    {
+        path:"movie-create",
+        component: MovieCreateComponent
     },
     { 
         path: '**', 

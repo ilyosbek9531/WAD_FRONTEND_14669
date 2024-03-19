@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Movie } from '../interfaces/movie.interface';
 
-const BASE_URL = 'http://localhost:7176/api'
+const BASE_URL = 'https://localhost:7176/api'
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceTodoService {
+export class MovieService {
   httpClient = inject(HttpClient);
 
   getMovies(){

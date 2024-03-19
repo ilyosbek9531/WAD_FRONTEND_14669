@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Category } from '../interfaces/category.interface';
+import { Observable } from 'rxjs';
 
-const BASE_URL = 'http://localhost:7176/api'
+const BASE_URL = 'https://localhost:7176/api'
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceTodoService {
+export class CategoryService {
   httpClient = inject(HttpClient);
 
-  getCategories(){
+  getCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(`${BASE_URL}/Categories`)
   };
 
-  getCategory(id: number){
+  getCategory(id: number): Observable<Category>{
     return this.httpClient.get<Category>(`${BASE_URL}/Categories/${id}`);
   };
 
@@ -25,7 +26,7 @@ export class ServiceTodoService {
     return this.httpClient.delete(`${BASE_URL}/Categories/${id}`);
   };
   
-  createCategory(category: Category){
+  createCategory(category: Category): Observable<Category>{
     return this.httpClient.post<Category>(`${BASE_URL}/Categories`, category);
   };
 }
