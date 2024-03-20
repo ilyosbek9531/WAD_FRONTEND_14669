@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Category } from '../interfaces/category.interface';
+import { Category, CategoryCreate } from '../interfaces/category.interface';
 import { Observable } from 'rxjs';
 
 const BASE_URL = 'https://localhost:7176/api'
@@ -26,7 +26,7 @@ export class CategoryService {
     return this.httpClient.delete(`${BASE_URL}/Categories/${id}`);
   };
   
-  createCategory(category: Category): Observable<Category>{
+  createCategory(category: CategoryCreate): Observable<Category>{
     return this.httpClient.post<Category>(`${BASE_URL}/Categories`, category);
   };
 }

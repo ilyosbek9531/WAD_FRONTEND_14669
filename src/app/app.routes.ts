@@ -7,6 +7,8 @@ import { CategoryDetailsComponent } from './pages/category-details/category-deta
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { CategoryCreateComponent } from './pages/category-create/category-create.component';
 import { MovieCreateComponent } from './pages/movie-create/movie-create.component';
+import { MovieEditComponent } from './pages/movie-edit/movie-edit.component';
+import { CategoryEditComponent } from './pages/category-edit/category-edit.component';
 
 export const routes: Routes = [
     {   path: '',   
@@ -26,6 +28,10 @@ export const routes: Routes = [
         component: CategoryDetailsComponent
     },
     {
+        path:"category/:id/edit",
+        component: CategoryEditComponent
+    },
+    {
         path:"category-create",
         component: CategoryCreateComponent
     },
@@ -36,6 +42,10 @@ export const routes: Routes = [
     {
         path:"movie/:id",
         component: MovieDetailsComponent
+    },
+    {
+        path:"movie/:id/edit",
+        component: MovieEditComponent
     },
     {
         path:"movie-create",

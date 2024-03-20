@@ -34,11 +34,11 @@ export class TableComponent {
   }
 
   EditClicked(id: number) {
-
+    this.router.navigateByUrl(this.location.path() + '/' + id + '/edit')
   }
 
   DetailsClicked(id: number) {
-    this.router.navigateByUrl(this.location.path() + '/' +id)
+    this.router.navigateByUrl(this.location.path() + '/' + id)
   }
 
   DeleteClicked(id: number) {
