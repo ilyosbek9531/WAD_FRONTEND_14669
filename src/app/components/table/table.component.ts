@@ -7,6 +7,11 @@ import { TableKey } from '../../../types';
 import { Movie } from '../../../interfaces/movie.interface';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import {
+  MatDialog,
+  MatDialogRef,
+} from "@angular/material/dialog";
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -41,7 +46,17 @@ export class TableComponent {
     this.router.navigateByUrl(this.location.path() + '/' + id)
   }
 
-  DeleteClicked(id: number) {
 
+
+
+  matDialogRef!: MatDialogRef<DeleteDialogComponent>;
+  constructor(private matDialog: MatDialog) {}
+
+
+  DeleteClicked(id: number) {
+    this.matDialogRef = this.matDialog.open(DeleteDialogComponent, {
+      data: { id, tableName:  this.location.path().slice(1) },
+      disableClose: true
+    });
   }
 }
