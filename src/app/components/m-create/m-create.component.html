@@ -1,0 +1,52 @@
+<mat-form-field class="field">
+    <mat-label>Title </mat-label>
+    <input matInput name="title" type="text" [(ngModel)]="createMovie.title">
+</mat-form-field>
+@if (!!errorObj?.['Title']) {
+    <mat-error class="field_error">{{errorObj?.['Title']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Description</mat-label>
+    <input matInput name="description" type="text" [(ngModel)]="createMovie.description">
+</mat-form-field>
+@if (!!errorObj?.['Description']) {
+    <mat-error class="field_error">{{errorObj?.['Description']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Duration</mat-label>
+    <input matInput name="duration" type="number" [(ngModel)]="createMovie.duration">
+</mat-form-field>
+@if (!!errorObj?.['$.duration']) {
+    <mat-error class="field_error">{{errorObj?.['$.duration']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" name="releaseDate" [(ngModel)]="createMovie.releaseDate">
+    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+@if (!!errorObj?.['$.releaseDate']) {
+    <mat-error class="field_error">{{errorObj?.['$.releaseDate']}}</mat-error>
+}
+@if (!!errorObj?.['ReleaseDate']) {
+    <mat-error class="field_error">{{errorObj?.['ReleaseDate']}}</mat-error>
+}
+
+<mat-form-field class="field">
+    <mat-label>Choose Category</mat-label>
+    <mat-select [(ngModel)]="categoryId" name="Category">
+        @for(c of categories; track c.id)
+        {
+        <mat-option [value]="c.id">{{c.title}}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
+
+<div class="buttons">
+    <button mat-stroked-button (click)="clearForm()" color="accent">Clear</button>
+    <button mat-stroked-button (click)="submitForm()" color="primary">Submit</button>
+</div>

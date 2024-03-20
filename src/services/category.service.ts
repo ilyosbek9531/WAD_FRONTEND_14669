@@ -18,7 +18,7 @@ export class CategoryService {
     return this.httpClient.get<Category>(`${BASE_URL}/Categories/${id}`);
   };
 
-  updateCategory(id: number, category: Category){
+  updateCategory(id: number, category: CategoryCreate){
     return this.httpClient.put(`${BASE_URL}/Categories/${id}`, category);  
   };
 
