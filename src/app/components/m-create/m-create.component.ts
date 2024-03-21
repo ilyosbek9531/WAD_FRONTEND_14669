@@ -1,10 +1,10 @@
 import { Component, Input, inject } from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Movie, MovieCreate } from '../../../interfaces/movie.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,15 @@ import { Category } from '../../../interfaces/category.interface';
 @Component({
   selector: 'app-m-create',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatDatepickerModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './m-create.component.html',
   styleUrl: './m-create.component.scss',
   providers: [provideNativeDateAdapter()],
@@ -25,33 +33,33 @@ export class MCreateComponent {
   movieDetail!: Movie;
 
   @Input()
-  isEdit: boolean = false
+  isEdit: boolean = false;
 
-  router = inject(Router)
-  movieService = inject(MovieService)
-  categoryService = inject(CategoryService)
-  activatedRoute = inject(ActivatedRoute)
+  router = inject(Router);
+  movieService = inject(MovieService);
+  categoryService = inject(CategoryService);
+  activatedRoute = inject(ActivatedRoute);
 
   createMovie: MovieCreate = {
     title: '',
     description: '',
     releaseDate: '',
     duration: null,
-    categoryId: null
-  }
+    categoryId: null,
+  };
   errorObj: any;
   categories: Category[] = [];
-  categoryId: number = 0;
-
+  categoryId: number | null = 0;
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe((result) => {
-      this.categories = result
+      this.categories = result;
     });
   }
 
   ngOnChanges() {
     this.createMovie = this.movieDetail;
+    this.categoryId = this.createMovie.categoryId;
   }
 
   clearForm() {
@@ -60,28 +68,37 @@ export class MCreateComponent {
       description: '',
       releaseDate: '',
       duration: null,
-      categoryId: null
-    }
+      categoryId: null,
+    };
   }
 
   submitForm() {
-    this.createMovie.categoryId=this.categoryId
-    if(this.isEdit) {
-      this.movieService.updateMovie(this.activatedRoute.snapshot.params["id"], this.createMovie).subscribe(_=>{
-        alert("Movie Updated")
-        this.router.navigateByUrl("movie");
-      },
-      error => {
-        this.errorObj = error.error.errors;
-      })
-    }else{
-      this.movieService.createMovie(this.createMovie).subscribe(_=> {
-        alert("Movie created")
-        this.router.navigateByUrl("movie")
-      },
-      error => {
-        this.errorObj = error.error.errors;
-      });
+    this.createMovie.categoryId = this.categoryId;
+    if (this.isEdit) {
+      this.movieService
+        .updateMovie(
+          this.activatedRoute.snapshot.params['id'],
+          this.createMovie
+        )
+        .subscribe(
+          (_) => {
+            alert('Movie Updated');
+            this.router.navigateByUrl('movie');
+          },
+          (error) => {
+            this.errorObj = error.error.errors;
+          }
+        );
+    } else {
+      this.movieService.createMovie(this.createMovie).subscribe(
+        (_) => {
+          alert('Movie created');
+          this.router.navigateByUrl('movie');
+        },
+        (error) => {
+          this.errorObj = error.error.errors;
+        }
+      );
     }
   }
 }
